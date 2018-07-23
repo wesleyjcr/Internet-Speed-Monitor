@@ -3,6 +3,7 @@
 import os
 from con_database import *
 from prettytable import *
+from speed_net import *
 
 class Show_results:
     def __init__(self):
@@ -22,7 +23,8 @@ class Show_results:
 2. Relatório do Ping
 3. Relatório de Download
 4. Relatório de Upload
-5. Encerrar aplicação
+5. Efetuar nova medição
+6. Encerrar aplicação
 
 Escolha uma opção:'''))
 
@@ -35,9 +37,11 @@ Escolha uma opção:'''))
         elif chose_option == 4:
             self.data_upload_report()
         elif chose_option == 5:
+            self.test_speed()
+        elif chose_option ==6:
             exit()
         else:
-            print('Opção inválida!')
+            input('Opção inválida!')
 
 
     def data_day_report(self):
@@ -87,6 +91,16 @@ Escolha uma opção:'''))
             self.row.add_row(self.linha)
         print(self.row.get_string())
         input('Pressione enter para continuar...')
+
+    def test_speed(self):
+        print('O teste pode demorar alguns segundos, dependendo de sua conexão... AGUARDE UM POUCO')
+        speed_net = Speed_net()
+        speed_net.get_speed()
+        speed_net.set_speed()
+        connect_db = Connect_database()
+        connect_db.connect()
+        connect_db.do_insert(speed_net.data_persistence())
+        connect_db.disconnect()
 
 if __name__ == '__main__':
     show_results = Show_results()
