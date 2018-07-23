@@ -22,7 +22,7 @@ class Connect_database:
     def get_day_mensurements(self):
         self.cursor.execute('''SELECT ID, PING, printf('%.2f',DOWNLOAD/1000000), printf('%.2f',UPLOAD/1000000), STRFTIME('%d/%m/%Y', DATE_TEST) AS DATE_TEST, SERVER
                                 FROM DATA_NET 
-                                WHERE strftime('%Y-%m-%d',DATE_TEST) = strftime('%Y-%m-%d',date('now'))''')
+                                ORDER BY ID DESC LIMIT 25''')
         return self.cursor.fetchall()
     
     def get_data_ping(self):
