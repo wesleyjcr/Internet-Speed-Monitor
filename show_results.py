@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import os
+import platform
 from con_database import *
 from prettytable import *
 from speed_net import *
@@ -8,10 +9,13 @@ from speed_net import *
 class Show_results:
     def __init__(self):
         self.connect_db = Connect_database()
-        
+        self.operational_system = platform.system()
 
     def main(self):
-        os.system('clear')
+        if self.operational_system =='Windows':
+            os.system('cls')    
+        else:
+            os.system('clear')
         chose_option = int(input('''
         VELOCIMETRO
 

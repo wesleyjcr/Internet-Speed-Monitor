@@ -11,11 +11,13 @@ class Speed_net:
         self.upload = None
         self.timestamp = None
         self.server = None
+        self.share = None
  
     def get_speed(self):
         self.spd_test.get_best_server()
         self.spd_test.download()
         self.spd_test.upload()
+        self.spd_test.results.share()
         self.tst_speed = self.spd_test.results.dict()
 
     def set_speed(self):
@@ -24,6 +26,7 @@ class Speed_net:
         self.upload =  self.tst_speed['upload']
         self.timestamp = datetime.datetime.now() 
         self.server = self.tst_speed['server']
+        self.share = self.tst_speed['share']
 
     def data_persistence(self):
         data_test = [(
@@ -31,5 +34,8 @@ class Speed_net:
             self.download,
             self.upload,
             self.timestamp,
-            self.server['sponsor'])]
+            self.server['sponsor'],
+            self.share
+            )]
+            
         return data_test

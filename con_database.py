@@ -16,7 +16,7 @@ class Connect_database:
         self.conn.close()
 
     def do_insert(self, data_test):
-        self.cursor.executemany("INSERT INTO DATA_NET (PING, DOWNLOAD, UPLOAD, DATE_TEST, SERVER) VALUES (?,?,?,?,?)",data_test)
+        self.cursor.executemany("INSERT INTO DATA_NET (PING, DOWNLOAD, UPLOAD, DATE_TEST, SERVER, SHARE) VALUES (?,?,?,?,?,?)",data_test)
         self.conn.commit()
     
     def get_day_mensurements(self):
